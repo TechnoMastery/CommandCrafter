@@ -11,11 +11,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minheur.betterosc.CommandCrafter;
 import net.minheur.betterosc.misc.Registry;
+import net.minheur.betterosc.misc.TankIntegration;
 import net.minheur.betterosc.recipes.Recipe;
 import net.minheur.betterosc.recipes.RecipesHandler;
-import net.minheur.betterosc.tank.TankHandler;
-import net.minheur.betterosc.tank.TankOperationHandler;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -134,36 +134,41 @@ public final class CraftHandler {
     public static int checkFoundAndConsume(Recipe.@NonNull IngredientMatcher ingredient, ItemStack candidate, int amountFound, Runnable emptyStack) {
         int toFind = ingredient.count() - amountFound;
 
-        if (!TankHandler.isTank(candidate)) { // non-tank behavior
-            if (!ingredient.matches(candidate)) return amountFound;
+        if (CommandCrafter.isTankModPresent.get()) {
+            if (TankIntegration.isTank(candidate)) {
+                // TANK BEHAVIOR
+                ItemStack tankContent = TankIntegration.getTankContent(candidate);
+                if (!ingredient.matches(tankContent)) return amountFound;
 
-            // found all - to find left = 0
-            if (candidate.getCount() > toFind) {
-                candidate.setCount(candidate.getCount() - toFind);
-                return amountFound + toFind;
+                long stored = TankIntegration.getTankAmount(candidate);
+                int amountToFind = ingredient.count() - amountFound;
+
+                if (stored > amountToFind) {
+                    TankIntegration.decrement(candidate, amountToFind);
+                    return amountFound + amountToFind;
+                }
+
+                int found = amountFound + (int) stored;
+                TankIntegration.decrement(candidate, stored);
+                emptyStack.run();
+
+                return found;
             }
-
-            toFind -= candidate.getCount();
-            emptyStack.run();
-            return ingredient.count() - toFind;
-        }
-        // TANK BEHAVIOR
-        ItemStack tankContent = TankOperationHandler.getTankContent(candidate);
-        if (!ingredient.matches(tankContent)) return amountFound;
-
-        long stored = TankOperationHandler.getAmountStored(candidate);
-        int amountToFind = ingredient.count() - amountFound;
-
-        if (stored > amountToFind) {
-            TankOperationHandler.decrementTank(candidate, amountToFind);
-            return amountFound + amountToFind;
         }
 
-        int found = amountFound + (int) stored;
-        TankOperationHandler.decrementTank(candidate, stored);
+        // NON TANK - default if mod not present / present and non tank
+
+        if (!ingredient.matches(candidate)) return amountFound;
+
+        // found all - to find left = 0
+        if (candidate.getCount() > toFind) {
+            candidate.setCount(candidate.getCount() - toFind);
+            return amountFound + toFind;
+        }
+
+        toFind -= candidate.getCount();
         emptyStack.run();
-
-        return found;
+        return ingredient.count() - toFind;
     }
 
     @Contract(pure = true)
@@ -175,24 +180,29 @@ public final class CraftHandler {
 
         for (int i = 0; i < crafter.getInventory().size(); i++) {
             ItemStack stack = crafter.getInventory().getStack(i).copy();
-            if (!TankHandler.isTank(stack)) { // normal behavior
-                returnValue.add(stack);
-                continue;
+
+            if (CommandCrafter.isTankModPresent.get()) {
+                if (TankIntegration.isTank(stack)) {
+                    // TANK BEHAVIOR
+                    long amount = TankIntegration.getTankAmount(stack);
+                    ItemStack tankContent = TankIntegration.getTankContent(stack);
+                    int contentMaxStackSize = tankContent.getMaxCount();
+
+                    long fullStacks = amount / contentMaxStackSize;
+                    int amountLeft = Math.toIntExact(amount % contentMaxStackSize);
+
+                    ItemStack templateStack = tankContent.copy();
+                    templateStack.setCount(contentMaxStackSize);
+
+                    for (int j = 0; j < fullStacks; j++) returnValue.add(templateStack.copy());
+                    templateStack.setCount(amountLeft);
+                    returnValue.add(templateStack.copy());
+                    continue;
+                }
             }
-            // TANK BEHAVIOR
-            long amount = TankOperationHandler.getAmountStored(stack);
-            ItemStack tankContent = TankOperationHandler.getTankContent(stack);
-            int contentMaxStackSize = tankContent.getMaxCount();
 
-            long fullStacks = amount / contentMaxStackSize;
-            int amountLeft = Math.toIntExact(amount % contentMaxStackSize);
-
-            ItemStack templateStack = tankContent.copy();
-            templateStack.setCount(contentMaxStackSize);
-
-            for (int j = 0; j < fullStacks; j++) returnValue.add(templateStack.copy());
-            templateStack.setCount(amountLeft);
-            returnValue.add(templateStack.copy());
+            // NORMAL BEHAVIOR
+            returnValue.add(stack);
         }
 
         // CLEAR all empty stacks / slots from available
