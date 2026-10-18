@@ -14,9 +14,7 @@
       "net.minheur.betterosc.CommandCrafter"
     ]
   },
-  "mixins": [
-    "betterosc.mixins.json"
-  ],
+  "mixins": [],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
