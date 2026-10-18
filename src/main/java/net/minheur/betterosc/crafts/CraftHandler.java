@@ -105,7 +105,7 @@ public final class CraftHandler {
 
     public static void craftItem(@NonNull Recipe recipe, ServerPlayerEntity crafter) {
         ItemStack result = recipe.result().getIsByStack() ? recipe.result().getAsStack() :
-                Registry.make(recipe.result(), crafter);
+                Registry.makeExecutor(recipe.result(), crafter);
         if (result == null || result.isEmpty())
             throw new IllegalStateException("Recipe result cannot be empty: " + recipe.recipeId());
 
