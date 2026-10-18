@@ -1,4 +1,4 @@
-package net.minheur.betterosc.crafts;
+package net.minheur.commandcrafter.crafts;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.command.argument.IdentifierArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.Identifier;
-import net.minheur.betterosc.recipes.RecipesHandler;
+import net.minheur.commandcrafter.recipes.RecipesHandler;
 import org.jspecify.annotations.NonNull;
 
 import static net.minecraft.server.command.CommandManager.argument;

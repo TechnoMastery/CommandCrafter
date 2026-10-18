@@ -1,8 +1,8 @@
-package net.minheur.betterosc.misc;
+package net.minheur.commandcrafter.misc;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minheur.betterosc.recipes.Recipe;
+import net.minheur.commandcrafter.recipes.Recipe;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;

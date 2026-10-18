@@ -11,7 +11,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.minheur.betterosc.CommandCrafter"
+      "net.minheur.commandcrafter.CommandCrafter"
     ]
   },
   "mixins": [],

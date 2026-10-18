@@ -1,4 +1,4 @@
-package net.minheur.betterosc.crafts;
+package net.minheur.commandcrafter.crafts;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -11,11 +11,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minheur.betterosc.CommandCrafter;
-import net.minheur.betterosc.misc.Registry;
-import net.minheur.betterosc.misc.TankIntegration;
-import net.minheur.betterosc.recipes.Recipe;
-import net.minheur.betterosc.recipes.RecipesHandler;
+import net.minheur.commandcrafter.CommandCrafter;
+import net.minheur.commandcrafter.misc.Registry;
+import net.minheur.commandcrafter.misc.TankIntegration;
+import net.minheur.commandcrafter.recipes.Recipe;
+import net.minheur.commandcrafter.recipes.RecipesHandler;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;

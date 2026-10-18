@@ -1,4 +1,4 @@
-package net.minheur.betterosc.recipes;
+package net.minheur.commandcrafter.recipes;
 
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;

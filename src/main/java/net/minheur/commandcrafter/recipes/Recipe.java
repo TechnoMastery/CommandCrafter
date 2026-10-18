@@ -1,4 +1,4 @@
-package net.minheur.betterosc.recipes;
+package net.minheur.commandcrafter.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

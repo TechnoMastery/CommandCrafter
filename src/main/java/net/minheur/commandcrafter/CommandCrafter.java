@@ -1,11 +1,11 @@
-package net.minheur.betterosc;
+package net.minheur.commandcrafter;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minheur.betterosc.crafts.DefaultRecipesHandler;
-import net.minheur.betterosc.crafts.RecipeCommandMaker;
-import net.minheur.betterosc.recipes.RecipesHandler;
+import net.minheur.commandcrafter.crafts.DefaultRecipesHandler;
+import net.minheur.commandcrafter.crafts.RecipeCommandMaker;
+import net.minheur.commandcrafter.recipes.RecipesHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

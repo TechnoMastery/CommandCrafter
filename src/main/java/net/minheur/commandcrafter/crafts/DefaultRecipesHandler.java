@@ -1,12 +1,10 @@
-package net.minheur.betterosc.crafts;
+package net.minheur.commandcrafter.crafts;
 
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 
 public final class DefaultRecipesHandler {
     private static final Path RECIPE_FOLDER = FabricLoader.getInstance().getConfigDir().resolve("betterosc/recipes");

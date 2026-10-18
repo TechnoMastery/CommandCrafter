@@ -1,4 +1,4 @@
-package net.minheur.betterosc.misc;
+package net.minheur.commandcrafter.misc;
 
 import net.minecraft.item.ItemStack;
 import net.minheur.itemtanks.TankHandler;
