@@ -1,6 +1,7 @@
 package net.minheur.betterosc;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minheur.betterosc.crafts.DefaultRecipesHandler;
 import net.minheur.betterosc.crafts.RecipeCommandMaker;
@@ -20,8 +21,8 @@ public final class CommandCrafter implements ModInitializer {
     @Override
     public void onInitialize() {
         DefaultRecipesHandler.checkAndCreate();
-        RecipesHandler.loadRecipes();
         RecipeCommandMaker.register();
+        ServerLifecycleEvents.SERVER_STARTED.register(event -> RecipesHandler.loadRecipes());
 
         if (FabricLoader.getInstance().isModLoaded("itemtanks")) isTankModPresent.set(true);
     }
