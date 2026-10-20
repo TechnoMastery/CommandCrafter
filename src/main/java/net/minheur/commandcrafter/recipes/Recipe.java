@@ -90,7 +90,7 @@ public record Recipe(String recipeId, ResultContainer result, List<IngredientMat
     private static @NonNull ResultContainer decodeResult(@NonNull JsonObject object) {
         // decode as 'osc' item, if applicable
         String id = object.getAsJsonObject().get("id").getAsString();
-        if (id.startsWith("betterosc:")) {
+        if (id.startsWith("custom:")) {
             JsonObject extra = object.has("extra") ?
                     object.getAsJsonObject("extra") :
                     new JsonObject();
