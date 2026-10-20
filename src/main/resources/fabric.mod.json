@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "betterosc",
+  "id": "craftbycommands",
   "version": "${version}",
-  "name": "betterOSC",
+  "name": "Craft by Commands",
   "description": "",
   "authors": [],
   "contact": {},
