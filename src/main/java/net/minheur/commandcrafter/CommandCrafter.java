@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class CommandCrafter implements ModInitializer {
 
-    public static final String MODID = "commandcrafter";
+    public static final String MODID = "craftbycommands";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
     public static final AtomicBoolean isTankModPresent = new AtomicBoolean(false);
