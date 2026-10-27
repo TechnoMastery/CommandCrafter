@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public final class DefaultRecipesHandler {
-    private static final Path RECIPE_FOLDER = FabricLoader.getInstance().getConfigDir().resolve("betterosc/recipes");
+    public static final Path RECIPE_FOLDER = FabricLoader.getInstance().getConfigDir().resolve("commandcrafter/recipes");
 
     public static void checkAndCreate() {
         if (Files.exists(RECIPE_FOLDER)) return; // if recipe folder exists, pass
