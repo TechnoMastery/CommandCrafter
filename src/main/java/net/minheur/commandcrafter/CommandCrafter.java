@@ -9,9 +9,11 @@ import net.minheur.commandcrafter.recipes.RecipesHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.file.Path;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class CommandCrafter implements ModInitializer {
+    public static final Path RECIPE_FOLDER = FabricLoader.getInstance().getConfigDir().resolve("commandcrafter/recipes");
 
     public static final String MODID = "craftbycommands";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);

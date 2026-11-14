@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minheur.commandcrafter.CommandCrafter;
 import org.jspecify.annotations.NonNull;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.util.stream.Stream;
 
 public final class RecipeLoader {
     public static final Gson GSON = new Gson();
-    private static final Path RECIPE_FOLDER = FabricLoader.getInstance().getConfigDir().resolve("commandRecipes");
+    private static final Path RECIPE_FOLDER = CommandCrafter.RECIPE_FOLDER;
 
     private RecipeLoader() {}
 
